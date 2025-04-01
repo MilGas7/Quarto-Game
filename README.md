@@ -1,5 +1,5 @@
 # Quarto-Game
-Possible classes:
+Classes:
 1. Board class - will contain a matrix and some methods like putPiece.
 2. Piece class - with four instance variables (color, height, shape, hole).
 3. Player class
