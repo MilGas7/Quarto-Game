@@ -49,6 +49,7 @@ public class Board{
                 for (int j = 0; j < SIZE - 1; j++)
                     System.out.print("     ");
                 System.out.println("| " + tiles[i] + " |");
+                System.out.println();
             }
             else if (i == 1 || i == 13) {
                 for (int j = 0; j < SIZE - 2; j++)
@@ -56,6 +57,7 @@ public class Board{
                 System.out.print("| " + tiles[i] + " |");
                 i += 1;
                 System.out.println("     | " + tiles[i] + " |");
+                System.out.println();
             }
             else if (i == 3 || i == 10) {
                 System.out.print("     | " + tiles[i] + " |");
@@ -63,6 +65,7 @@ public class Board{
                 System.out.print("     | " + tiles[i] + " |");
                 i += 1;
                 System.out.println("     | " + tiles[i] + " |");
+                System.out.println();
             }
             else if (i == 6) {
                 for (int j = 0; j < SIZE; j++) {
@@ -71,6 +74,7 @@ public class Board{
                 }
                 i -= 1;
                 System.out.println("");
+                System.out.println();
             }
         }
     }
