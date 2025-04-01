@@ -1,3 +1,3 @@
-public class ChangingPiece extends Piece {
-    
-}
+//public class ChangingPiece extends Piece {
+//
+//}
