@@ -46,36 +46,40 @@ public class Board{
     public void print() {
         for (int i = 0; i < SIZE * SIZE; i++) {
             if (i == 0 || i == 15) {
-                for (int j = 0; j < SIZE - 1; j++)
-                    System.out.print("     ");
+                System.out.printf("%15d", i);
                 System.out.println("| " + tiles[i] + " |");
                 System.out.println();
             }
             else if (i == 1 || i == 13) {
-                for (int j = 0; j < SIZE - 2; j++)
-                    System.out.print("     ");
+                System.out.printf("%10d", i);
                 System.out.print("| " + tiles[i] + " |");
                 i += 1;
-                System.out.println("     | " + tiles[i] + " |");
+                System.out.printf("%5d", i);
+                System.out.println("| " + tiles[i] + " |");
                 System.out.println();
             }
             else if (i == 3 || i == 10) {
-                System.out.print("     | " + tiles[i] + " |");
+                System.out.printf("%5d", i);
+                System.out.print("| " + tiles[i] + " |");
                 i += 1;
-                System.out.print("     | " + tiles[i] + " |");
+                System.out.printf("%5d", i);
+                System.out.print("| " + tiles[i] + " |");
                 i += 1;
-                System.out.println("     | " + tiles[i] + " |");
+                System.out.printf("%5d", i);
+                System.out.println("| " + tiles[i] + " |");
                 System.out.println();
             }
             else if (i == 6) {
                 for (int j = 0; j < SIZE; j++) {
-                    System.out.print("| " + tiles[i] + " |     ");
+                    System.out.print("| " + tiles[i] + " |");
+                    System.out.printf("%-5d", i);
                     i += 1;
                 }
                 i -= 1;
-                System.out.println("");
+                System.out.println();
                 System.out.println();
             }
         }
     }
+
 }
