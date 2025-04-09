@@ -1,5 +1,5 @@
 /**
- * Each piece to byte
+ * Each piece to char
  * a - White, Big, Circle, With
  * b - White, Big, Circle, Without
  * c - White, Big, Square, With
@@ -31,57 +31,65 @@ public class Piece{
     private Hole hole;
 
     public Piece(boolean isWhite, boolean isBig, boolean isCircle, boolean isWithHole){
-        if (isWhite)
-            this.color = Color.WHITE;
-        else
-            this.color = Color.BLACK;
-
-        if (isBig)
-            this.size = Size.BIG;
-        else
-            this.size = Size.SMALL;
-
-        if(isCircle)
-            this.shape = Shape.CIRCLE;
-        else
-            this.shape = Shape.SQUARE;
-
-        if(isWithHole)
-            this.hole = Hole.WITH;
-        else
-            this.hole = Hole.WITHOUT;
+        this.color = isWhite ? Color.WHITE : Color.BLACK;
+        this.size = isBig ? Size.BIG : Size.SMALL;
+        this.shape = isCircle ? Shape.CIRCLE : Shape.SQUARE;
+        this.hole = isWithHole ? Hole.WITH : Hole.WITHOUT;
     }
 
-    public byte toByte(){
-        if (this.color == Color.WHITE && this.size == Size.BIG && this.shape == Shape.CIRCLE && this.hole == Hole.WITH)
+    public Piece (Piece piece){
+        this.color = piece.color;
+        this.size = piece.size;
+        this.shape = piece.shape;
+        this.hole = piece.hole;
+    }
+
+    public Color getColor(){
+        return this.color;
+    }
+
+    public Size getSize(){
+        return this.size;
+    }
+
+    public Shape getShape(){
+        return this.shape;
+    }
+
+    public Hole getHole(){
+        return this.hole;
+    }
+
+    public static char toChar(Piece piece){
+        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
             return 'a';
-        if (this.color == Color.WHITE && this.size == Size.BIG && this.shape == Shape.CIRCLE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
             return 'b';
-        if (this.color == Color.WHITE && this.size == Size.BIG && this.shape == Shape.SQUARE && this.hole == Hole.WITH)
+        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
             return 'c';
-        if (this.color == Color.WHITE && this.size == Size.BIG && this.shape == Shape.SQUARE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
             return 'd';
-        if (this.color == Color.WHITE && this.size == Size.SMALL && this.shape == Shape.CIRCLE && this.hole == Hole.WITH)
+        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
             return 'e';
-        if (this.color == Color.WHITE && this.size == Size.SMALL && this.shape == Shape.CIRCLE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
             return 'f';
-        if (this.color == Color.WHITE && this.size == Size.SMALL && this.shape == Shape.SQUARE && this.hole == Hole.WITH)
+        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
             return 'g';
-        if (this.color == Color.WHITE && this.size == Size.SMALL && this.shape == Shape.SQUARE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
             return 'h';
-        if (this.color == Color.BLACK && this.size == Size.BIG && this.shape == Shape.CIRCLE && this.hole == Hole.WITH)
+        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
             return 'i';
-        if (this.color == Color.BLACK && this.size == Size.BIG && this.shape == Shape.CIRCLE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
             return 'j';
-        if (this.color == Color.BLACK && this.size == Size.BIG && this.shape == Shape.SQUARE && this.hole == Hole.WITH)
+        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
             return 'k';
-        if (this.color == Color.BLACK && this.size == Size.BIG && this.shape == Shape.SQUARE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
             return 'l';
-        if (this.color == Color.BLACK && this.size == Size.SMALL && this.shape == Shape.CIRCLE && this.hole == Hole.WITH)
+        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
             return 'm';
-        if (this.color == Color.BLACK && this.size == Size.SMALL && this.shape == Shape.CIRCLE && this.hole == Hole.WITHOUT)
+        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
             return 'n';
-        if (this.color == Color.BLACK && this.size == Size.SMALL && this.shape == Shape.SQUARE && this.hole == Hole.WITH)
+        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
             return 'o';
         return 'p';
     }
