@@ -38,10 +38,12 @@ public class Piece{
     }
 
     public Piece (Piece piece){
-        this.color = piece.color;
-        this.size = piece.size;
-        this.shape = piece.shape;
-        this.hole = piece.hole;
+        if(piece != null){
+            this.color = piece.color;
+            this.size = piece.size;
+            this.shape = piece.shape;
+            this.hole = piece.hole;
+        }
     }
 
     public Color getColor(){
@@ -58,6 +60,10 @@ public class Piece{
 
     public Hole getHole(){
         return this.hole;
+    }
+
+    public boolean getIsEmpty(){
+        return isEmpty;
     }
 
     public static char toChar(Piece piece){
@@ -96,6 +102,28 @@ public class Piece{
         else{
             return 0;
         }
+    }
+
+    public static boolean isQuarto (Piece piece1, Piece piece2, Piece piece3, Piece piece4){
+        if(piece1 == null || piece2 == null || piece3 == null || piece4 == null)
+            return false;
+        if(piece1.getColor() == Color.WHITE && piece2.getColor() == Color.WHITE && piece3.getColor() == Color.WHITE && piece4.getColor() == Color.WHITE)
+            return true;
+        if(piece1.getColor() == Color.BLACK && piece2.getColor() == Color.BLACK && piece3.getColor() == Color.BLACK && piece4.getColor() == Color.BLACK)
+            return true; 
+        if(piece1.getSize() == Size.BIG && piece2.getSize() == Size.BIG && piece3.getSize() == Size.BIG && piece4.getSize() == Size.BIG)
+            return true;
+        if(piece1.getSize() == Size.SMALL && piece2.getSize() == Size.SMALL && piece3.getSize() == Size.SMALL && piece4.getSize() == Size.SMALL)
+            return true;
+        if(piece1.getShape() == Shape.CIRCLE && piece2.getShape() == Shape.CIRCLE && piece3.getShape() == Shape.CIRCLE && piece4.getShape() == Shape.CIRCLE)
+            return true;
+        if(piece1.getShape() == Shape.SQUARE && piece2.getShape() == Shape.SQUARE && piece3.getShape() == Shape.SQUARE && piece4.getShape() == Shape.SQUARE)
+            return true;
+        if(piece1.getHole() == Hole.WITH && piece2.getHole() == Hole.WITH && piece3.getHole() == Hole.WITH && piece4.getHole() == Hole.WITH)
+            return true;
+        if(piece1.getHole() == Hole.WITHOUT && piece2.getHole() == Hole.WITHOUT && piece3.getHole() == Hole.WITHOUT && piece4.getHole() == Hole.WITHOUT)
+            return true;
+        return false;
     }
 
 }
