@@ -19,7 +19,8 @@ public class Game{
         Scanner keyboard = new Scanner(System.in);
         char pieceChar;
         int position;
-        while(true){
+        boolean isQuarto = false;
+        while(!isQuarto){
             board.print();
             Player currentPlayer = player1Turn ? player1 : player2;
             System.out.println("Player " + (player1Turn ? "1" : "2") + ", choose a piece (a-p): ");
@@ -50,8 +51,18 @@ public class Game{
                 continue;
             }
             board.setTile(position, pieceChar);
-
-            player1Turn = !player1Turn;
+            int row = position / board.SIZE;
+            int col = position % board.SIZE;
+            char[] charColumn = new char[board.SIZE];
+            char[] charRow = new char[board.SIZE];
+            for(int i = 0; i < board.SIZE; i++){
+                charColumn[i] = board.getTile(row * board.SIZE + i);
+                charRow[i] = board.getTile(i * board.SIZE + col);
+            }
+            if(Piece.isQuarto(new Piece(Board.makePiece(charColumn[0])), new Piece(Board.makePiece(charColumn[1])), new Piece(Board.makePiece(charColumn[2])), new Piece(Board.makePiece(charColumn[3])) ))
+                isQuarto = true;
+            if(Piece.isQuarto(new Piece(Board.makePiece(charRow[0])), new Piece(Board.makePiece(charRow[1])), new Piece(Board.makePiece(charRow[2])), new Piece(Board.makePiece(charRow[3])) ))
+                isQuarto = true;
         }
     }
 
@@ -59,4 +70,6 @@ public class Game{
         turn = !turn;
         return turn;
     }
+
+
 }
