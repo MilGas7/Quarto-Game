@@ -91,7 +91,11 @@ public class Piece{
             return 'n';
         if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
             return 'o';
-        return 'p';
+        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
+            return 'p';
+        else{
+            return 0;
+        }
     }
 
 }
