@@ -36,9 +36,12 @@ public class Game{
                 continue;
             }
 
+            player1Turn = changeOfBoolean(player1Turn);
+            currentPlayer = player1Turn ? player1 : player2;
+
             currentPlayer.choosePiece(pieceChar);
 
-            System.out.println("Enter position to place your piece:");
+            System.out.println("Player " + (player1Turn ? "1" : "2") + " enter position to place your piece:");
             position = keyboard.nextInt();
             keyboard.nextLine();
 
@@ -52,4 +55,8 @@ public class Game{
         }
     }
 
+    public static boolean changeOfBoolean(boolean turn){
+        turn = !turn;
+        return turn;
+    }
 }
