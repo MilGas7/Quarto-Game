@@ -62,9 +62,6 @@ public class Piece{
         return this.hole;
     }
 
-    public boolean getIsEmpty(){
-        return isEmpty;
-    }
 
     public static char toChar(Piece piece){
         if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
