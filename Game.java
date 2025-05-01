@@ -41,31 +41,23 @@ public class Game{
             System.out.println("Player " + (player1Turn ? "1" : "2") + " enter position to place your piece(row and column):");
             row = keyboard.nextInt();
             column = keyboard.nextInt();
-            keyboard.nextLine();
-
             if (row < 0 || row >= Board.SIZE || column < 0 ||
                     column >= Board.SIZE || board.getTile(row * Board.SIZE + column) != null) {
+                System.out.println(board.getTile(row * Board.SIZE + column) != null);
                 System.out.println("Invalid position. Try again.");
                 continue;
             }
             board.setTile(row * Board.SIZE + column, new Piece(Piece.makePiece(pieceInt)));
-            Piece[] pieceColumn = new Piece[board.SIZE];
-            Piece[] pieceRow = new Piece[board.SIZE];
-            for(int i = 0; i < board.SIZE; i++){
-                pieceColumn[i] = board.getTile(row * board.SIZE + i);
-                pieceRow[i] = board.getTile(i * board.SIZE + column);
-            }
-            if(Piece.isQuarto(new Piece(pieceColumn[0]), new Piece(pieceColumn[1]), new Piece(pieceColumn[2]), new Piece(pieceColumn[3]) ))
+
+            if(Piece.isQuarto(board.getTile(row * board.SIZE + 0), board.getTile(row * board.SIZE + 1), board.getTile(row * board.SIZE + 1), board.getTile(row * board.SIZE + 1) ))
                 isQuarto = true;
-            if(Piece.isQuarto(new Piece(pieceRow[0]), new Piece(pieceRow[1]), new Piece(pieceRow[2]), new Piece(pieceRow[3]) ))
+            if(Piece.isQuarto(board.getTile(0 * board.SIZE + column), board.getTile(1 * board.SIZE + column), board.getTile(2 * board.SIZE + column), board.getTile(3 * board.SIZE + column) ))
+                isQuarto = true;
+            if(row == column && Piece.isQuarto(board.getTile(0 * board.SIZE + 0), board.getTile(1 * board.SIZE + 1), board.getTile(2 * board.SIZE + 2), board.getTile(3 * board.SIZE + 3) ))
+                isQuarto = true;
+            if(row == board.SIZE - column && Piece.isQuarto(board.getTile(0 * board.SIZE + board.SIZE - 0), board.getTile(1 * board.SIZE + board.SIZE - 1), board.getTile(2 * board.SIZE + board.SIZE - 2), board.getTile(3 * board.SIZE + board.SIZE - 3) ))
                 isQuarto = true;
         }
     }
-
-    public static boolean changeOfBoolean(boolean turn){
-        turn = !turn;
-        return turn;
-    }
-
 
 }
