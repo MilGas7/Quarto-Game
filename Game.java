@@ -5,7 +5,7 @@ public class Game{
     Player player1;
     Player player2;
     Board board;
-    char currentPlayerPiece;
+    Piece currentPlayerPiece;
     boolean player1Turn;
 
     public Game(){
@@ -17,51 +17,47 @@ public class Game{
 
     public void play(){
         Scanner keyboard = new Scanner(System.in);
-        char pieceChar;
-        int position;
+        int pieceInt;
+        int row;
+        int column;
         boolean isQuarto = false;
         while(!isQuarto){
             board.print();
             Player currentPlayer = player1Turn ? player1 : player2;
-            System.out.println("Player " + (player1Turn ? "1" : "2") + ", choose a piece (a-p): ");
-            String inputString = keyboard.nextLine();
+            System.out.println("Player " + (player1Turn ? "1" : "2") + ", choose a piece (1-16): ");
 
-            if (inputString.length() == 0) {
-                System.out.println("Invalid input. Please enter a character.");
-                continue;
-            }
-            pieceChar = inputString.charAt(0);
+            pieceInt = keyboard.nextInt();
 
-            if (pieceChar < 'a' || pieceChar > 'p') {
-                System.out.println("Invalid piece. Choose a character between a-p.");
+            if (pieceInt < 1 || pieceInt > 16) {
+                System.out.println("Invalid piece. Choose an integer between 1-16.");
                 continue;
             }
 
-            player1Turn = changeOfBoolean(player1Turn);
+            player1Turn = !(player1Turn);
             currentPlayer = player1Turn ? player1 : player2;
 
-            currentPlayer.choosePiece(pieceChar);
+            currentPlayer.choosePiece(pieceInt);
 
-            System.out.println("Player " + (player1Turn ? "1" : "2") + " enter position to place your piece:");
-            position = keyboard.nextInt();
+            System.out.println("Player " + (player1Turn ? "1" : "2") + " enter position to place your piece(row and column):");
+            row = keyboard.nextInt();
+            column = keyboard.nextInt();
             keyboard.nextLine();
 
-            if (position < 0 || position >= Board.SIZE * Board.SIZE || board.getTile(position) != ' ') {
+            if (row < 0 || row >= Board.SIZE || column < 0 ||
+                    column >= Board.SIZE || board.getTile(row * Board.SIZE + column) != null) {
                 System.out.println("Invalid position. Try again.");
                 continue;
             }
-            board.setTile(position, pieceChar);
-            int row = position / board.SIZE;
-            int col = position % board.SIZE;
-            char[] charColumn = new char[board.SIZE];
-            char[] charRow = new char[board.SIZE];
+            board.setTile(row * Board.SIZE + column, new Piece(Piece.makePiece(pieceInt)));
+            Piece[] pieceColumn = new Piece[board.SIZE];
+            Piece[] pieceRow = new Piece[board.SIZE];
             for(int i = 0; i < board.SIZE; i++){
-                charColumn[i] = board.getTile(row * board.SIZE + i);
-                charRow[i] = board.getTile(i * board.SIZE + col);
+                pieceColumn[i] = board.getTile(row * board.SIZE + i);
+                pieceRow[i] = board.getTile(i * board.SIZE + column);
             }
-            if(Piece.isQuarto(new Piece(Board.makePiece(charColumn[0])), new Piece(Board.makePiece(charColumn[1])), new Piece(Board.makePiece(charColumn[2])), new Piece(Board.makePiece(charColumn[3])) ))
+            if(Piece.isQuarto(new Piece(pieceColumn[0]), new Piece(pieceColumn[1]), new Piece(pieceColumn[2]), new Piece(pieceColumn[3]) ))
                 isQuarto = true;
-            if(Piece.isQuarto(new Piece(Board.makePiece(charRow[0])), new Piece(Board.makePiece(charRow[1])), new Piece(Board.makePiece(charRow[2])), new Piece(Board.makePiece(charRow[3])) ))
+            if(Piece.isQuarto(new Piece(pieceRow[0]), new Piece(pieceRow[1]), new Piece(pieceRow[2]), new Piece(pieceRow[3]) ))
                 isQuarto = true;
         }
     }

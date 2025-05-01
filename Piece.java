@@ -1,25 +1,26 @@
 /**
  * Each piece to char
- * a - White, Big, Circle, With
- * b - White, Big, Circle, Without
- * c - White, Big, Square, With
- * d - White, Big, Square, Without
- * e - White, Small, Circle, With
- * f - White, Small, Circle, Without
- * g - White, Small, Square, With
- * h - White, Small, Square, Without
- * i - Black, Big, Circle, With
- * j - Black, Big, Circle, Without
- * k - Black, Big, Square, With
- * l - Black, Big, Square, Without
- * m - Black, Small, Circle, With
- * n - Black, Small, Circle, Without
- * o - Black, Small, Square, With
- * p - Black, Small, Square, Without
+ * 1 - White, Big, Circle, With
+ * 2 - White, Big, Circle, Without
+ * 3 - White, Big, Square, With
+ * 4 - White, Big, Square, Without
+ * 5 - White, Small, Circle, With
+ * 6 - White, Small, Circle, Without
+ * 7 - White, Small, Square, With
+ * 8 - White, Small, Square, Without
+ * 9 - Black, Big, Circle, With
+ * 10 - Black, Big, Circle, Without
+ * 11 - Black, Big, Square, With
+ * 12 - Black, Big, Square, Without
+ * 13 - Black, Small, Circle, With
+ * 14 - Black, Small, Circle, Without
+ * 15 - Black, Small, Square, With
+ * 16 - Black, Small, Square, Without
  */
 
 public class Piece{
 
+    enum NameOfPiece {WBCX, WBCO, WBSX, WBSO, WSCX, WSCO, WSSX, WSSO, BBCX, BBCO, BBSX, BBSO, BSCX, BSCO, BSSX, BSSO};
     enum Color {WHITE, BLACK};
     enum Size {BIG, SMALL};
     enum Shape {CIRCLE, SQUARE};
@@ -29,12 +30,14 @@ public class Piece{
     private Size size;
     private Shape shape;
     private Hole hole;
+    private NameOfPiece nameOfPiece;
 
     public Piece(boolean isWhite, boolean isBig, boolean isCircle, boolean isWithHole){
         this.color = isWhite ? Color.WHITE : Color.BLACK;
         this.size = isBig ? Size.BIG : Size.SMALL;
         this.shape = isCircle ? Shape.CIRCLE : Shape.SQUARE;
         this.hole = isWithHole ? Hole.WITH : Hole.WITHOUT;
+        setNamePiece();
     }
 
     public Piece (Piece piece){
@@ -43,6 +46,7 @@ public class Piece{
             this.size = piece.size;
             this.shape = piece.shape;
             this.hole = piece.hole;
+            setNamePiece();
         }
     }
 
@@ -62,43 +66,84 @@ public class Piece{
         return this.hole;
     }
 
+    public NameOfPiece getNameOfPiece(){ return this.nameOfPiece; }
 
-    public static char toChar(Piece piece){
-        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
-            return 'a';
-        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
-            return 'b';
-        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
-            return 'c';
-        if (piece.color == Color.WHITE && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
-            return 'd';
-        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
-            return 'e';
-        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
-            return 'f';
-        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
-            return 'g';
-        if (piece.color == Color.WHITE && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
-            return 'h';
-        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
-            return 'i';
-        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
-            return 'j';
-        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
-            return 'k';
-        if (piece.color == Color.BLACK && piece.size == Size.BIG && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
-            return 'l';
-        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITH)
-            return 'm';
-        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.CIRCLE && piece.hole == Hole.WITHOUT)
-            return 'n';
-        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITH)
-            return 'o';
-        if (piece.color == Color.BLACK && piece.size == Size.SMALL && piece.shape == Shape.SQUARE && piece.hole == Hole.WITHOUT)
-            return 'p';
-        else{
-            return 0;
+    private void setNamePiece() {
+        String name = "";
+        if(this.color.equals(Color.WHITE))
+            name += "W";
+        else
+            name += "B";
+        if(this.size.equals(Size.BIG))
+            name += "B";
+        else
+            name += "S";
+        if(this.shape.equals(Shape.CIRCLE))
+            name += "C";
+        else
+            name += "S";
+        if(this.hole.equals(Hole.WITH))
+            name += "O";
+        else
+            name += "X";
+        this.nameOfPiece = NameOfPiece.valueOf(name);
+    }
+
+    public static Piece makePiece (int pieceInt) {
+        Piece newPiece;
+        switch (pieceInt) {
+            case 1:
+                newPiece = new Piece(true, true, true, true);
+                break;
+            case 2:
+                newPiece = new Piece(true, true, true, false);
+                break;
+            case 3:
+                newPiece = new Piece(true, true, false, true);
+                break;
+            case 4:
+                newPiece = new Piece(true, true, false, false);
+                break;
+            case 5:
+                newPiece = new Piece(true, false, true, true);
+                break;
+            case 6:
+                newPiece = new Piece(true, false, true, false);
+                break;
+            case 7:
+                newPiece = new Piece(true, false, false, true);
+                break;
+            case 8:
+                newPiece = new Piece(true, false, false, false);
+                break;
+            case 9:
+                newPiece = new Piece(false, true, true, true);
+                break;
+            case 10:
+                newPiece = new Piece(false, true, true, false);
+                break;
+            case 11:
+                newPiece = new Piece(false, true, false, true);
+                break;
+            case 12:
+                newPiece = new Piece(false, true, false, false);
+                break;
+            case 13:
+                newPiece = new Piece(false, false, true, true);
+                break;
+            case 14:
+                newPiece = new Piece(false, false, true, false);
+                break;
+            case 15:
+                newPiece = new Piece(false, false, false, true);
+                break;
+            case 16:
+                newPiece = new Piece(false, false, false, false);
+                break;
+            default:
+                return null;
         }
+        return newPiece;
     }
 
     public static boolean isQuarto (Piece piece1, Piece piece2, Piece piece3, Piece piece4){

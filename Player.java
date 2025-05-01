@@ -4,8 +4,8 @@ public class Player{
 
     }
 
-    public Piece choosePiece (char pieceChar){
-        Piece newPiece = new Piece(Board.makePiece(pieceChar));
+    public Piece choosePiece (int pieceInt){
+        Piece newPiece = new Piece(Piece.makePiece(pieceInt));
         System.out.println("You choose a piece with characteristics: " +
                 newPiece.getColor() + ", " + newPiece.getSize() + ", " + newPiece.getShape() + ", " +
                 newPiece.getHole() + " HOLE");
