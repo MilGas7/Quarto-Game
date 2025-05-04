@@ -5,7 +5,6 @@ public class Game{
     Player player1;
     Player player2;
     Board board;
-    Piece currentPlayerPiece;
     boolean player1Turn;
 
     public Game(){
@@ -17,46 +16,50 @@ public class Game{
 
     public void play(){
         Scanner keyboard = new Scanner(System.in);
-        int pieceInt;
-        int row;
-        int column;
+        int pieceInt = -1;
+        int row = -1;
+        int column = -1;
         boolean isQuarto = false;
         while(!isQuarto){
             board.print();
             Player currentPlayer = player1Turn ? player1 : player2;
-            System.out.println("Player " + (player1Turn ? "1" : "2") + ", choose a piece (1-16): ");
 
-            pieceInt = keyboard.nextInt();
-
-            if (pieceInt < 1 || pieceInt > 16) {
-                System.out.println("Invalid piece. Choose an integer between 1-16.");
-                continue;
+            boolean flagPiece = true;
+            while(flagPiece){
+                try{
+                    System.out.println("Player " + (player1Turn ? "1" : "2") + ", choose a piece (1-16): ");
+                    pieceInt = keyboard.nextInt();
+                    currentPlayer.choosePiece(pieceInt);
+                    board.checkPiece(pieceInt);
+                    flagPiece = false;
+                }
+                catch(NoSuchPieceException|PieceRepeatException e){
+                    System.out.println(e.getMessage());
+                }
             }
 
             player1Turn = !(player1Turn);
             currentPlayer = player1Turn ? player1 : player2;
 
-            currentPlayer.choosePiece(pieceInt);
-
-            System.out.println("Player " + (player1Turn ? "1" : "2") + " enter position to place your piece(row and column):");
-            row = keyboard.nextInt();
-            column = keyboard.nextInt();
-            if (row < 0 || row >= Board.SIZE || column < 0 ||
-                    column >= Board.SIZE || board.getTile(row * Board.SIZE + column) != null) {
-                System.out.println(board.getTile(row * Board.SIZE + column) != null);
-                System.out.println("Invalid position. Try again.");
-                continue;
+            boolean flagIndex = true;
+            while(flagIndex){
+                try{
+                    System.out.println("Player " + (player1Turn ? "1" : "2") + " enter position to place your piece(row and column):");
+                    row = keyboard.nextInt();
+                    column = keyboard.nextInt();
+                    board.checkIndex(row * Board.SIZE + column);
+                    flagIndex = false;
+                }
+                catch(PositionOutOfBoardException|NonEmptyTileException e){
+                    System.out.println(e.getMessage());
+                }
             }
-            board.setTile(row * Board.SIZE + column, new Piece(Piece.makePiece(pieceInt)));
-
-            if(Piece.isQuarto(board.getTile(row * board.SIZE + 0), board.getTile(row * board.SIZE + 1), board.getTile(row * board.SIZE + 1), board.getTile(row * board.SIZE + 1) ))
+            board.setTile(row * Board.SIZE + column, pieceInt);
+            if(board.isQuarto(row, column)){
+                board.print();
+                System.out.println("Congratulations! Player " + (player1Turn ? "1" : "2") + " wins.");
                 isQuarto = true;
-            if(Piece.isQuarto(board.getTile(0 * board.SIZE + column), board.getTile(1 * board.SIZE + column), board.getTile(2 * board.SIZE + column), board.getTile(3 * board.SIZE + column) ))
-                isQuarto = true;
-            if(row == column && Piece.isQuarto(board.getTile(0 * board.SIZE + 0), board.getTile(1 * board.SIZE + 1), board.getTile(2 * board.SIZE + 2), board.getTile(3 * board.SIZE + 3) ))
-                isQuarto = true;
-            if(row == board.SIZE - column && Piece.isQuarto(board.getTile(0 * board.SIZE + board.SIZE - 0), board.getTile(1 * board.SIZE + board.SIZE - 1), board.getTile(2 * board.SIZE + board.SIZE - 2), board.getTile(3 * board.SIZE + board.SIZE - 3) ))
-                isQuarto = true;
+            }
         }
     }
 

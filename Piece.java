@@ -146,7 +146,7 @@ public class Piece{
         return newPiece;
     }
 
-    public static boolean isQuarto (Piece piece1, Piece piece2, Piece piece3, Piece piece4){
+    public static boolean haveCommonAttribute (Piece piece1, Piece piece2, Piece piece3, Piece piece4){
         if(piece1 == null || piece2 == null || piece3 == null || piece4 == null)
             return false;
         if(piece1.getColor() == Color.WHITE && piece2.getColor() == Color.WHITE && piece3.getColor() == Color.WHITE && piece4.getColor() == Color.WHITE)
