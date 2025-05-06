@@ -44,7 +44,7 @@ public class Board{
     }
 
     public void checkPiece(int pieceInt){
-        if(pieceInt < 0 || pieceInt > 16)
+        if(pieceInt <= 0 || pieceInt > 16)
             throw new NoSuchPieceException("There is no such piece.");
         if(pieceCount[pieceInt])
             throw new PieceRepeatException("You already had such a piece.");

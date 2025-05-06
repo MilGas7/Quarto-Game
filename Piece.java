@@ -18,8 +18,7 @@
  * 16 - Black, Small, Square, Without
  */
 
-public class Piece{
-
+public class Piece {
     enum NameOfPiece {WBCX, WBCO, WBSX, WBSO, WSCX, WSCO, WSSX, WSSO, BBCX, BBCO, BBSX, BBSO, BSCX, BSCO, BSSX, BSSO};
     enum Color {WHITE, BLACK};
     enum Size {BIG, SMALL};
@@ -40,7 +39,7 @@ public class Piece{
         setNamePiece();
     }
 
-    public Piece (Piece piece){
+    public Piece(Piece piece){
         if(piece != null){
             this.color = piece.color;
             this.size = piece.size;
@@ -49,24 +48,6 @@ public class Piece{
             setNamePiece();
         }
     }
-
-    public Color getColor(){
-        return this.color;
-    }
-
-    public Size getSize(){
-        return this.size;
-    }
-
-    public Shape getShape(){
-        return this.shape;
-    }
-
-    public Hole getHole(){
-        return this.hole;
-    }
-
-    public NameOfPiece getNameOfPiece(){ return this.nameOfPiece; }
 
     private void setNamePiece() {
         String name = "";
@@ -89,61 +70,66 @@ public class Piece{
         this.nameOfPiece = NameOfPiece.valueOf(name);
     }
 
+    public Color getColor(){
+        return this.color;
+    }
+
+    public Size getSize(){
+        return this.size;
+    }
+
+    public Shape getShape(){
+        return this.shape;
+    }
+
+    public Hole getHole(){
+        return this.hole;
+    }
+
+    public NameOfPiece getNameOfPiece(){ return this.nameOfPiece; }
+
+    public String toString(){
+        return this.getColor() + ", " + this.getSize() + ", " + this.getShape() + ", " +
+                this.getHole() + " HOLE";
+    }
+
     public static Piece makePiece (int pieceInt) {
-        Piece newPiece;
         switch (pieceInt) {
             case 1:
-                newPiece = new Piece(true, true, true, true);
-                break;
+                return new Piece(true, true, true, true);
             case 2:
-                newPiece = new Piece(true, true, true, false);
-                break;
+                return new Piece(true, true, true, false);
             case 3:
-                newPiece = new Piece(true, true, false, true);
-                break;
+                return new Piece(true, true, false, true);
             case 4:
-                newPiece = new Piece(true, true, false, false);
-                break;
+                return new Piece(true, true, false, false);
             case 5:
-                newPiece = new Piece(true, false, true, true);
-                break;
+                return new Piece(true, false, true, true);
             case 6:
-                newPiece = new Piece(true, false, true, false);
-                break;
+                return new Piece(true, false, true, false);
             case 7:
-                newPiece = new Piece(true, false, false, true);
-                break;
+                return new Piece(true, false, false, true);
             case 8:
-                newPiece = new Piece(true, false, false, false);
-                break;
+                return new Piece(true, false, false, false);
             case 9:
-                newPiece = new Piece(false, true, true, true);
-                break;
+                return new Piece(false, true, true, true);
             case 10:
-                newPiece = new Piece(false, true, true, false);
-                break;
+                return new Piece(false, true, true, false);
             case 11:
-                newPiece = new Piece(false, true, false, true);
-                break;
+                return new Piece(false, true, false, true);
             case 12:
-                newPiece = new Piece(false, true, false, false);
-                break;
+                return new Piece(false, true, false, false);
             case 13:
-                newPiece = new Piece(false, false, true, true);
-                break;
+                return new Piece(false, false, true, true);
             case 14:
-                newPiece = new Piece(false, false, true, false);
-                break;
+                return new Piece(false, false, true, false);
             case 15:
-                newPiece = new Piece(false, false, false, true);
-                break;
+                return new Piece(false, false, false, true);
             case 16:
-                newPiece = new Piece(false, false, false, false);
-                break;
+                return new Piece(false, false, false, false);
             default:
                 return null;
         }
-        return newPiece;
     }
 
     public static boolean haveCommonAttribute (Piece piece1, Piece piece2, Piece piece3, Piece piece4){
@@ -152,7 +138,7 @@ public class Piece{
         if(piece1.getColor() == Color.WHITE && piece2.getColor() == Color.WHITE && piece3.getColor() == Color.WHITE && piece4.getColor() == Color.WHITE)
             return true;
         if(piece1.getColor() == Color.BLACK && piece2.getColor() == Color.BLACK && piece3.getColor() == Color.BLACK && piece4.getColor() == Color.BLACK)
-            return true; 
+            return true;
         if(piece1.getSize() == Size.BIG && piece2.getSize() == Size.BIG && piece3.getSize() == Size.BIG && piece4.getSize() == Size.BIG)
             return true;
         if(piece1.getSize() == Size.SMALL && piece2.getSize() == Size.SMALL && piece3.getSize() == Size.SMALL && piece4.getSize() == Size.SMALL)
@@ -167,5 +153,4 @@ public class Piece{
             return true;
         return false;
     }
-
 }
