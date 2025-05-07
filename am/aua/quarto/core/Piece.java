@@ -21,11 +21,11 @@ package am.aua.quarto.core;
  */
 
 public class Piece {
-    enum NameOfPiece {WBCS, WBCH, WBSS, WBSH, WSCS, WSCH, WSSS, WSSH, BBCS, BBCH, BBSS, BBSH, BSCS, BSCH, BSSS, BSSH};
-    enum Color {WHITE, BLACK};
-    enum Size {BIG, SMALL};
-    enum Shape {CIRCLE, SQUARE};
-    enum Hole {SOLID, HOLLOW};
+    public enum NameOfPiece {WBCS, WBCH, WBSS, WBSH, WSCS, WSCH, WSSS, WSSH, BBCS, BBCH, BBSS, BBSH, BSCS, BSCH, BSSS, BSSH};
+    public enum Color {WHITE, BLACK};
+    public enum Size {BIG, SMALL};
+    public enum Shape {CIRCLE, SQUARE};
+    public enum Hole {SOLID, HOLLOW};
 
     private Color color;
     private Size size;
@@ -51,7 +51,7 @@ public class Piece {
         }
     }
 
-    private void setNamePiece() {
+    public void setNamePiece() {
         String name = "";
         if(this.color.equals(Color.WHITE))
             name += "W";
@@ -71,6 +71,14 @@ public class Piece {
             name += "S";
         this.nameOfPiece = NameOfPiece.valueOf(name);
     }
+
+    public void setColor(Color color) { this.color = color; }
+
+    public void setSize(Size size) { this.size = size; }
+
+    public void setShape(Shape shape) { this.shape = shape; }
+
+    public void setHole(Hole hole) { this.hole = hole; }
 
     public Color getColor(){
         return this.color;
@@ -131,6 +139,45 @@ public class Piece {
                 return new Piece(false, false, false, false);
             default:
                 return null;
+        }
+    }
+
+    public static int toInt(Piece piece){
+        switch (piece.getNameOfPiece()){
+            case NameOfPiece.WBCH:
+                return 1;
+            case NameOfPiece.WBCS:
+                return 2;
+            case NameOfPiece.WBSH:
+                return 3;
+            case NameOfPiece.WBSS:
+                return 4;
+            case NameOfPiece.WSCH:
+                return 5;
+            case NameOfPiece.WSCS:
+                return 6;
+            case NameOfPiece.WSSH:
+                return 7;
+            case NameOfPiece.WSSS:
+                return 8;
+            case NameOfPiece.BBCH:
+                return 9;
+            case NameOfPiece.BBCS:
+                return 10;
+            case NameOfPiece.BBSH:
+                return 11;
+            case NameOfPiece.BBSS:
+                return 12;
+            case NameOfPiece.BSCH:
+                return 13;
+            case NameOfPiece.BSCS:
+                return 14;
+            case NameOfPiece.BSSH:
+                return 15;
+            case NameOfPiece.BSSS:
+                return 16;
+            default:
+                return 0;
         }
     }
 

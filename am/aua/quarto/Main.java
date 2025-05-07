@@ -7,7 +7,8 @@ public class Main {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Input:\n" +
                 "1 for playing original version with 2 players \n" +
-                "2 for playing original version with random generator");
+                "2 for playing original version with random generator \n" +
+                "3 for playing adventurous version with 2 players");
         int n = keyboard.nextInt();
         Game game;
         switch (n){
@@ -17,6 +18,10 @@ public class Main {
                 break;
             case 2:
                 game = new SoloGame();
+                game.play();
+                break;
+            case 3:
+                game = new AdventurousGame();
                 game.play();
                 break;
             default:

@@ -17,11 +17,21 @@ public abstract class Game implements Gameable{
 
     public Player getPlayer2(){ return this.player2; }
 
-    public Board getboard(){return board; }
+    public Board getboard(){ return board; }
 
     public boolean getPlayer1Turn() {return this.player1Turn; }
 
     public void setPlayer2(Player player) { this.player2 = player; }
+
+    public void setPlayer1(Player player) { this.player1 = player; }
+
+    public void setBoard(Board board) {
+        if (board instanceof StarBoard) {
+            this.board = new StarBoard((StarBoard)board);
+        } else {
+            this.board = new Board(board);
+        }
+    }
 
     public void changePlayer1Turn() { this.player1Turn = !player1Turn; }
 
