@@ -12,7 +12,7 @@ public class Board{
         for (int i = 0; i < tiles.length; i++) {
             tiles[i] = null;
         }
-        pieceCount = new boolean[16]; //number of possible piece type
+        pieceCount = new boolean[SIZE * SIZE + 1]; //number of possible piece type
         for(int i = 0; i < pieceCount.length; i++)
             pieceCount[i] = false;
     }
@@ -23,20 +23,24 @@ public class Board{
             System.exit(0);
         }
         this.tiles = new Piece[SIZE * SIZE];
-        this.pieceCount = new boolean[16];
+        this.pieceCount = new boolean[SIZE * SIZE + 1];
         for(int i = 0; i < tiles.length; i++)
             this.tiles[i] = original.tiles[i];
         for(int i = 0; i < pieceCount.length; i++)
             this.pieceCount[i] = original.pieceCount[i];
     }
 
+    public void setPieceCount(int index){
+        this.pieceCount[index] = true;
+    }
+
     public Piece getTile(int index) {
         return tiles[index];
     }
 
-    public void setTile(int index, int pieceInt) {
-        tiles[index] = new Piece(Piece.makePiece(pieceInt));
-        pieceCount[pieceInt] = true;
+    public void setTile(int index, Piece piece) {
+        tiles[index] = piece;
+        pieceCount[Piece.toInt(piece)] = true;
     }
 
     public void checkIndex(int index){

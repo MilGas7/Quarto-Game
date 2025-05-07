@@ -21,7 +21,7 @@ public class SoloGame extends Game{
 
             int tileIndex = currentPlayer.chooseTile(getboard());
 
-            getboard().setTile(tileIndex, pieceInt);
+            getboard().setTile(tileIndex, Piece.makePiece(pieceInt));
             if(getboard().isQuarto(tileIndex / Board.SIZE, tileIndex % Board.SIZE)){
                 getboard().print();
                 if(getPlayer1Turn()){
