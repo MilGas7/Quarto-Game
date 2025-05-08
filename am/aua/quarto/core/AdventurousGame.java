@@ -1,58 +1,58 @@
 package am.aua.quarto.core;
-import am.aua.quarto.core.exceptions.TraitNotFoundException;
 
-import java.util.Scanner;
+import am.aua.quarto.core.exceptions.*;
+import am.aua.quarto.oi.*;
 
 public class AdventurousGame extends Game{
 
-    public AdventurousGame(){
-        super();
+    public AdventurousGame(IOHandler ioHandler) {
+        super(ioHandler);
         setBoard(new StarBoard());
     }
 
     public StarBoard getBoard(){ return (StarBoard)super.getboard(); }
 
-    public void play(){
+    @Override
+    public void play() {
         boolean isQuarto = false;
-        while(!isQuarto){
-            getboard().print();
+
+        while (!isQuarto) {
+            io.showBoard(getboard());
+
             Player currentPlayer = getPlayer1Turn() ? getPlayer1() : getPlayer2();
-            System.out.println("Current player is PLAYER " + (getPlayer1Turn() ? "1" : "2"));
-            int pieceInt = currentPlayer.choosePiece(getboard());
+            io.showMessage("Current player is PLAYER " + (getPlayer1Turn() ? "1" : "2"));
+            int pieceInt = currentPlayer.choosePiece(getboard(), io);
 
             changePlayer1Turn();
             currentPlayer = getPlayer1Turn() ? getPlayer1() : getPlayer2();
+            io.showMessage("Current player is PLAYER " + (getPlayer1Turn() ? "1" : "2"));
 
-            System.out.println("Current player is PLAYER " + (getPlayer1Turn() ? "1" : "2"));
+            int tileIndex = currentPlayer.chooseTile(getboard(), io);
 
-            int tileIndex = currentPlayer.chooseTile(getboard());
-
-            getBoard().setTile(tileIndex, ChangeablePiece.fromPiece(Piece.makePiece(pieceInt)));
+            ChangeablePiece piece = ChangeablePiece.fromPiece(Piece.makePiece(pieceInt));
+            getBoard().setTile(tileIndex, piece);
             getboard().setPieceCount(pieceInt);
 
-            Scanner keyboard = new Scanner(System.in);
-
-            if(getBoard().hasStar(tileIndex)) {
-                boolean flag = false;
-                getboard().print();
-                while(!flag) {
+            // Handle star logic
+            if (getBoard().hasStar(tileIndex)) {
+                boolean traitChanged = false;
+                io.showBoard(getboard());
+                while (!traitChanged) {
                     try {
-                        System.out.println("Write a trait you want to change (Color, Size, Shape, Hole): ");
-                        String traitName = keyboard.nextLine().split(" ")[0];
-                        ChangeablePiece piece = (ChangeablePiece)getBoard().getTile(tileIndex);
+                        String traitName = io.getInput("Tile has a STAR! Write a trait to change (Color, Size, Shape, Hole):")
+                                .split(" ")[0];
                         piece.changeTrait(traitName);
                         getBoard().setTile(tileIndex, piece);
-                        flag = true;
-                    }
-                    catch(TraitNotFoundException e) {
-                        System.out.println(e.getMessage());
+                        traitChanged = true;
+                    } catch (TraitNotFoundException e) {
+                        io.showMessage(e.getMessage());
                     }
                 }
             }
 
-            if(getboard().isQuarto(tileIndex / Board.SIZE, tileIndex % Board.SIZE)){
-                getboard().print();
-                System.out.println("Congratulations! Player " + (getPlayer1Turn() ? "1" : "2") + " wins.");
+            if (getboard().isQuarto(tileIndex / Board.SIZE, tileIndex % Board.SIZE)) {
+                io.showBoard(getboard());
+                io.showMessage("Congratulations! Player " + (getPlayer1Turn() ? "1" : "2") + " wins.");
                 isQuarto = true;
             }
         }

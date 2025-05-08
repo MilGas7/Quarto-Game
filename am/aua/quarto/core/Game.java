@@ -1,12 +1,16 @@
 package am.aua.quarto.core;
 
+import am.aua.quarto.oi.*;
+
 public abstract class Game implements Gameable{
     private Player player1;
     private Player player2;
     private Board board;
     private boolean player1Turn;
+    protected IOHandler io;
 
-    public Game(){
+    public Game(IOHandler ioHandler){
+        this.io = ioHandler;
         player1 = new Player();
         player2 = new Player();
         board = new Board();

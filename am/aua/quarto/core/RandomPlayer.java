@@ -1,10 +1,13 @@
 package am.aua.quarto.core;
+
 import java.util.Random;
 import am.aua.quarto.core.exceptions.*;
+import am.aua.quarto.oi.*;
 
 public class RandomPlayer extends Player {
 
-    public int choosePiece (Board board){
+    @Override
+    public int choosePiece (Board board, IOHandler io){
         Random randomGenerator = new Random();
         boolean flag = false;
         int pieceInt = -1;
@@ -18,19 +21,20 @@ public class RandomPlayer extends Player {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("Chosen piece has characteristics: " + new Piece(Piece.makePiece(pieceInt)));
+        io.showMessage("Chosen piece has characteristics: " + new Piece(Piece.makePiece(pieceInt)));
         return pieceInt;
     }
 
-    public int chooseTile (Board board){
+    @Override
+    public int chooseTile (Board board, IOHandler io){
         Random randomGenerator = new Random();
         boolean flag = false;
         int row = -1;
         int col = -1;
         while(!flag){
             try{
-                row = randomGenerator.nextInt(4);
-                col = randomGenerator.nextInt(4);
+                row = randomGenerator.nextInt(Board.SIZE);
+                col = randomGenerator.nextInt(Board.SIZE);
                 board.checkIndex(row * Board.SIZE + col);
                 flag = true;
             }

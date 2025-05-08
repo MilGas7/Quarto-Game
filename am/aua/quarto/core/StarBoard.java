@@ -48,37 +48,4 @@ public class StarBoard extends Board{
         Piece piece = super.getTile(index);
         return piece != null ? (ChangeablePiece)piece : null;
     }
-
-    @Override
-    public void print() {
-        System.out.print("   ");
-        for(int i = 0; i < SIZE; i++) {
-            System.out.print("    " + i + "  ");
-        }
-        System.out.println();
-
-        for (int row = 0; row < SIZE; row++) {
-            System.out.print("    ");
-            for(int i = 0; i < SIZE; i++) {
-                System.out.print("-------");
-            }
-            System.out.print("-\n" + row + "   ");
-
-            for (int col = 0; col < SIZE; col++) {
-                ChangeablePiece piece = tiles[row * SIZE + col];
-                if(piece == null) {
-                    System.out.print("|      ");
-                } else {
-                    System.out.print("| " + piece.getNameOfPiece().toString() + " ");
-                }
-            }
-            System.out.println("|");
-
-            System.out.print("    ");
-            for(int i = 0; i < SIZE; i++) {
-                System.out.print("-------");
-            }
-            System.out.println("-");
-        }
-    }
 }
