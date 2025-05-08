@@ -2,22 +2,22 @@ package am.aua.quarto.core;
 
 /**
  * Each piece to char
- * 1 - White, Big, Circle, Hollow
- * 2 - White, Big, Circle, Solid
- * 3 - White, Big, Square, Hollow
- * 4 - White, Big, Square, Solid
- * 5 - White, Small, Circle, Hollow
- * 6 - White, Small, Circle, Solid
- * 7 - White, Small, Square, Hollow
- * 8 - White, Small, Square, Solid
- * 9 - Black, Big, Circle, Hollow
- * 10 - Black, Big, Circle, Solid
- * 11 - Black, Big, Square, Hollow
- * 12 - Black, Big, Square, Solid
- * 13 - Black, Small, Circle, Hollow
- * 14 - Black, Small, Circle, Solid
- * 15 - Black, Small, Square, Hollow
- * 16 - Black, Small, Square, Solid
+ * 0 - White, Big, Circle, Hollow
+ * 1 - White, Big, Circle, Solid
+ * 2 - White, Big, Square, Hollow
+ * 3 - White, Big, Square, Solid
+ * 4 - White, Small, Circle, Hollow
+ * 5 - White, Small, Circle, Solid
+ * 6 - White, Small, Square, Hollow
+ * 7 - White, Small, Square, Solid
+ * 8 - Black, Big, Circle, Hollow
+ * 9 - Black, Big, Circle, Solid
+ * 10 - Black, Big, Square, Hollow
+ * 11 - Black, Big, Square, Solid
+ * 12 - Black, Small, Circle, Hollow
+ * 13 - Black, Small, Circle, Solid
+ * 14 - Black, Small, Square, Hollow
+ * 15 - Black, Small, Square, Solid
  */
 
 public class Piece {
@@ -37,7 +37,7 @@ public class Piece {
         this.color = isWhite ? Color.WHITE : Color.BLACK;
         this.size = isBig ? Size.BIG : Size.SMALL;
         this.shape = isCircle ? Shape.CIRCLE : Shape.SQUARE;
-        this.hole = isHollow ? Hole.SOLID : Hole.HOLLOW;
+        this.hole = isHollow ? Hole.HOLLOW : Hole.SOLID;
         setNamePiece();
     }
 
@@ -66,9 +66,9 @@ public class Piece {
         else
             name += "S";
         if(this.hole.equals(Hole.SOLID))
-            name += "H";
-        else
             name += "S";
+        else
+            name += "H";
         this.nameOfPiece = NameOfPiece.valueOf(name);
     }
 
@@ -105,37 +105,37 @@ public class Piece {
 
     public static Piece makePiece (int pieceInt) {
         switch (pieceInt) {
-            case 1:
+            case 0:
                 return new Piece(true, true, true, true);
-            case 2:
+            case 1:
                 return new Piece(true, true, true, false);
-            case 3:
+            case 2:
                 return new Piece(true, true, false, true);
-            case 4:
+            case 3:
                 return new Piece(true, true, false, false);
-            case 5:
+            case 4:
                 return new Piece(true, false, true, true);
-            case 6:
+            case 5:
                 return new Piece(true, false, true, false);
-            case 7:
+            case 6:
                 return new Piece(true, false, false, true);
-            case 8:
+            case 7:
                 return new Piece(true, false, false, false);
-            case 9:
+            case 8:
                 return new Piece(false, true, true, true);
-            case 10:
+            case 9:
                 return new Piece(false, true, true, false);
-            case 11:
+            case 10:
                 return new Piece(false, true, false, true);
-            case 12:
+            case 11:
                 return new Piece(false, true, false, false);
-            case 13:
+            case 12:
                 return new Piece(false, false, true, true);
-            case 14:
+            case 13:
                 return new Piece(false, false, true, false);
-            case 15:
+            case 14:
                 return new Piece(false, false, false, true);
-            case 16:
+            case 15:
                 return new Piece(false, false, false, false);
             default:
                 return null;
@@ -145,37 +145,37 @@ public class Piece {
     public static int toInt(Piece piece){
         switch (piece.getNameOfPiece()){
             case NameOfPiece.WBCH:
-                return 1;
+                return 0;
             case NameOfPiece.WBCS:
-                return 2;
+                return 1;
             case NameOfPiece.WBSH:
-                return 3;
+                return 2;
             case NameOfPiece.WBSS:
-                return 4;
+                return 3;
             case NameOfPiece.WSCH:
-                return 5;
+                return 4;
             case NameOfPiece.WSCS:
-                return 6;
+                return 5;
             case NameOfPiece.WSSH:
-                return 7;
+                return 6;
             case NameOfPiece.WSSS:
-                return 8;
+                return 7;
             case NameOfPiece.BBCH:
-                return 9;
+                return 8;
             case NameOfPiece.BBCS:
-                return 10;
+                return 9;
             case NameOfPiece.BBSH:
-                return 11;
+                return 10;
             case NameOfPiece.BBSS:
-                return 12;
+                return 11;
             case NameOfPiece.BSCH:
-                return 13;
+                return 12;
             case NameOfPiece.BSCS:
-                return 14;
+                return 13;
             case NameOfPiece.BSSH:
-                return 15;
+                return 14;
             case NameOfPiece.BSSS:
-                return 16;
+                return 15;
             default:
                 return 0;
         }

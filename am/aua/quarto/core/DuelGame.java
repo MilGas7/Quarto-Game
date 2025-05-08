@@ -21,6 +21,7 @@ public class DuelGame extends Game {
             int tileIndex = currentPlayer.chooseTile(getboard());
 
             getboard().setTile(tileIndex, Piece.makePiece(pieceInt));
+            getboard().setPieceCount(pieceInt);
             if(getboard().isQuarto(tileIndex / Board.SIZE, tileIndex % Board.SIZE)){
                 getboard().print();
                 System.out.println("Congratulations! Player " + (getPlayer1Turn() ? "1" : "2") + " wins.");

@@ -10,7 +10,7 @@ public class Player{
         int pieceInt = -1; //just needed, value be changed after
         while(!flag){
             try{
-                System.out.println("Choose a piece (1-16): ");
+                System.out.println("Choose a piece (0-15): ");
                 pieceInt = keyboard.nextInt();
                 board.checkPiece(pieceInt);
                 flag = true;

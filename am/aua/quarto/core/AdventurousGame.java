@@ -28,6 +28,7 @@ public class AdventurousGame extends Game{
             int tileIndex = currentPlayer.chooseTile(getboard());
 
             getBoard().setTile(tileIndex, ChangeablePiece.fromPiece(Piece.makePiece(pieceInt)));
+            getboard().setPieceCount(pieceInt);
 
             Scanner keyboard = new Scanner(System.in);
 

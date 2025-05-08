@@ -12,7 +12,7 @@ public class Board{
         for (int i = 0; i < tiles.length; i++) {
             tiles[i] = null;
         }
-        pieceCount = new boolean[SIZE * SIZE + 1]; //number of possible piece type
+        pieceCount = new boolean[SIZE * SIZE]; //number of possible piece type
         for(int i = 0; i < pieceCount.length; i++)
             pieceCount[i] = false;
     }
@@ -23,7 +23,7 @@ public class Board{
             System.exit(0);
         }
         this.tiles = new Piece[SIZE * SIZE];
-        this.pieceCount = new boolean[SIZE * SIZE + 1];
+        this.pieceCount = new boolean[SIZE * SIZE];
         for(int i = 0; i < tiles.length; i++)
             this.tiles[i] = original.tiles[i];
         for(int i = 0; i < pieceCount.length; i++)
@@ -40,7 +40,6 @@ public class Board{
 
     public void setTile(int index, Piece piece) {
         tiles[index] = piece;
-        pieceCount[Piece.toInt(piece)] = true;
     }
 
     public void checkIndex(int index){
@@ -51,7 +50,7 @@ public class Board{
     }
 
     public void checkPiece(int pieceInt){
-        if(pieceInt <= 0 || pieceInt > 16)
+        if(pieceInt < 0 || pieceInt >= 16)
             throw new NoSuchPieceException("There is no such piece.");
         if(pieceCount[pieceInt])
             throw new PieceRepeatException("You already had such a piece.");
