@@ -28,7 +28,8 @@ public abstract class Game implements Gameable{
     public void setBoard(Board board) {
         if (board instanceof StarBoard) {
             this.board = new StarBoard((StarBoard)board);
-        } else {
+        }
+        else {
             this.board = new Board(board);
         }
     }
