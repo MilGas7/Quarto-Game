@@ -1,13 +1,30 @@
 package am.aua.quarto.core;
 
 import am.aua.quarto.oi.*;
+import am.aua.quarto.oi.gui.*;
 
-public class SoloGame extends Game{
+import javax.swing.*;
+
+/**
+ * Represents a single-player game of Quarto where the human player (Player 1)
+ * plays against a randomly-moving computer (RandomPlayer).
+ */
+public class SoloGame extends Game {
+
+    /**
+     * Constructs a new SoloGame instance, initializing player 2
+     * as a {@link RandomPlayer}.
+     *
+     * @param ioHandler the input/output handler (console or GUI-based)
+     */
     public SoloGame(IOHandler ioHandler) {
         super(ioHandler);
         setPlayer2(new RandomPlayer());
     }
 
+    /**
+     * Starts and controls the game loop for Solo mode.
+     */
     @Override
     public void play() {
         boolean isQuarto = false;
@@ -19,6 +36,10 @@ public class SoloGame extends Game{
             io.showMessage("Turn is " + (getPlayer1Turn() ? "YOURS" : "RANDOM PLAYER"));
 
             int pieceInt = currentPlayer.choosePiece(getboard(), io);
+
+            if (io instanceof BaseQuartoGUI) {
+                SwingUtilities.invokeLater(() -> ((BaseQuartoGUI) io).setSelectedPiece(pieceInt));
+            }
 
             changePlayer1Turn();
             currentPlayer = getPlayer1Turn() ? getPlayer1() : getPlayer2();
