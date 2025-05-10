@@ -1,4 +1,4 @@
-# Quarto-DuelGame
+# Quarto
 Before starting the game the player can become familiar with the pieces below. 
 * Each piece to char
 * 0 - White, Big, Circle, Hollow
