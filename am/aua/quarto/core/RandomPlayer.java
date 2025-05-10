@@ -53,7 +53,7 @@ public class RandomPlayer extends Player {
             try {
                 row = randomGenerator.nextInt(Board.SIZE);
                 col = randomGenerator.nextInt(Board.SIZE);
-                board.checkIndex(row * Board.SIZE + col);
+                board.checkIndex(row, col);
                 flag = true;
             } catch (NonEmptyTileException | PositionOutOfBoardException e) {
                 System.out.println(e.getMessage());

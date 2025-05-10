@@ -97,15 +97,16 @@ public class Board {
     /**
      * Checks if the index is within bounds and the tile is empty.
      *
-     * @param index the tile index to validate.
+     * @param row the row index of the tile (0-based)
+     * @param col the column index of the tile (0-based)
      * @throws PositionOutOfBoardException if the index is out of range.
      * @throws NonEmptyTileException       if the tile is already occupied.
      */
-    public void checkIndex(int index) {
-        if (index < 0 || index >= SIZE * SIZE)
-            throw new PositionOutOfBoardException("Row and column are out of board.");
-        if (tiles[index] != null)
-            throw new NonEmptyTileException("Tile of row " + (index / SIZE) + " and column " + (index % SIZE) + " is not empty");
+    public void checkIndex(int row, int col) {
+        if (row < 0 || row >= SIZE || col < 0 || col >= SIZE)
+            throw new PositionOutOfBoardException("Row or column are out of board.");
+        if (tiles[row * Board.SIZE + col] != null)
+            throw new NonEmptyTileException("Tile of row " + (row) + " and column " + (col) + " is not empty");
     }
 
     /**

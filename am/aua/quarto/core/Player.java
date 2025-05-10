@@ -56,8 +56,7 @@ public class Player {
                 row = Integer.parseInt(parts[0]);
                 col = Integer.parseInt(parts[1]);
 
-                int index = row * Board.SIZE + col;
-                board.checkIndex(index);
+                board.checkIndex(row, col);
                 flag = true;
             } catch (NonEmptyTileException | PositionOutOfBoardException e) {
                 io.showMessage(e.getMessage());

@@ -29,7 +29,7 @@ Board(Board original) – Copy constructor that duplicates another board’s sta
 setPieceCount(int index) – Marks a piece as used by its index.
 getTile(int index) – Returns the piece at the given board index.
 setTile(int index, Piece piece) – Places a piece at the given board index.
-checkIndex(int index) – Validates that an index is within bounds and not occupied.
+checkIndex(int row, int col) – Validates that an index is within bounds and not occupied.
 checkPiece(int pieceInt) – Ensures the piece index is valid and not already used.
 isQuarto(int row, int col) – Checks if placing a piece at the given row and column creates a winning condition.
 
