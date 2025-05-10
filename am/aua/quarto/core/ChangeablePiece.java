@@ -2,18 +2,40 @@ package am.aua.quarto.core;
 
 import am.aua.quarto.core.exceptions.TraitNotFoundException;
 
+/**
+ * Represents a special type of {@link Piece} whose traits (color, size, shape, hole) can be changed.
+ */
 public class ChangeablePiece extends Piece {
 
-    public ChangeablePiece(boolean isWhite, boolean isBig, boolean isCircle, boolean isHollow){
+    /**
+     * Constructs a {@code ChangeablePiece} with specified attributes.
+     *
+     * @param isWhite  {@code true} if the piece is white; {@code false} if black.
+     * @param isBig    {@code true} if the piece is big; {@code false} if small.
+     * @param isCircle {@code true} if the piece is a circle; {@code false} if square.
+     * @param isHollow {@code true} if the piece is hollow; {@code false} if solid.
+     */
+    public ChangeablePiece(boolean isWhite, boolean isBig, boolean isCircle, boolean isHollow) {
         super(isWhite, isBig, isCircle, isHollow);
     }
 
-    public ChangeablePiece(Piece piece){
+    /**
+     * Constructs a {@code ChangeablePiece} from an existing {@link Piece} instance.
+     *
+     * @param piece the original piece to copy traits from.
+     */
+    public ChangeablePiece(Piece piece) {
         super(piece);
     }
 
-    public void changeTrait(String traitName){
-        switch(traitName.toUpperCase()){
+    /**
+     * Changes one trait of the piece based on the provided trait name.
+     *
+     * @param traitName the name of the trait to change.
+     * @throws TraitNotFoundException if the trait name is invalid.
+     */
+    public void changeTrait(String traitName) {
+        switch (traitName.toUpperCase()) {
             case "COLOR":
                 setColor((getColor() == Color.WHITE) ? Color.BLACK : Color.WHITE);
                 break;
@@ -32,7 +54,13 @@ public class ChangeablePiece extends Piece {
         this.setNamePiece();
     }
 
-    //A wrapper method to convert Piece to ChangeablePiece
+    /**
+     * A method to convert a regular {@link Piece} into a {@code ChangeablePiece}.
+     *
+     * @param piece the original piece to convert.
+     * @return a new {@code ChangeablePiece} with the same attributes as the input piece.
+     * Returns {@code null} if the input piece is null.
+     */
     public static ChangeablePiece fromPiece(Piece piece) {
         if (piece == null) return null;
         return new ChangeablePiece(
